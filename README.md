@@ -1,4 +1,4 @@
-# UnBoundEd
+# UnBoundEd - Unbounded Education
 
 ## Brief Project Description
 
@@ -42,6 +42,7 @@ consumption and maximum engagement. 🚀
 
 4. **Lightweight UI & Optimized Performance:**
    - Minimalist design for smooth operation on low-end devices.
+   - Usage of TailwindCSS for a lightweight UI.
    - Performance optimization for slow networks.
 
 5. **Micro-Certifications & Leaderboard:**
