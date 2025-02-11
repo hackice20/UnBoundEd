@@ -25,6 +25,7 @@ enhance collaboration.
 Our platform ensures inclusive and scalable learning, empowering students with minimal data
 consumption and maximum engagement. 🚀
 
+---
 ## Key Features to Implement:
 
 1. **User Authentication and Authorization:**
@@ -54,6 +55,11 @@ consumption and maximum engagement. 🚀
    - Peer-to-peer learning platforms.
    - Mentor matching systems.
    - Discussion forums for collaboration.
+
+8. **Courses & Lessons:**
+   - Video lectures, PDFs, downloadable notes, quizzes.
+     
+---
 
 ## Resources and Libraries:
 
@@ -85,3 +91,107 @@ consumption and maximum engagement. 🚀
    - **Discourse:** An open-source discussion platform that can be integrated for forums.
    - **Socket.io:** For real-time communication features like chat and notifications.
    - **Mentorship Matching Algorithm:** Develop a custom algorithm to match mentors and mentees based on preferences and expertise.
+   
+---
+
+## Backend Stack & Libraries
+
+| Feature                    | Tech Stack / Library |
+|----------------------------|----------------------|
+| **Authentication**         | Passport.js, JWT, bcrypt |
+| **Database**               | MongoDB, Mongoose |
+| **API Framework**          | Express.js |
+| **AI Chatbot**             | Claude AI API |
+| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |
+| **Video Storage**          | Youtube |
+| **Certificate Generation** | pdfkit, node-html-pdf |
+| **Offline Syncing**        | PouchDB, Workbox (Service Workers) |
+| **Community Features**     | Socket.io, Discourse Integration |
+| **Gamification & Rewards** | Custom Rewards Logic |
+
+---
+
+## Backend Project Structure
+
+```
+backend/
+├── config/
+│   ├── db.js                # Database Connection (MongoDB)
+│   ├── cloudStorage.js      # Cloud Storage Config (AWS/GCS)
+│   ├── aiConfig.js          # Claude AI API Config
+│   ├── auth.js              # JWT Authentication Setup
+│   ├── certConfig.js        # Certificate Generation Setup
+│   ├── leaderboardConfig.js # Leaderboard Logic
+│   ├── offlineMode.js       # Offline Storage Config
+├── controllers/
+│   ├── userController.js    # User Authentication, Profile Management
+│   ├── courseController.js  # Course CRUD (Videos, Notes)
+│   ├── aiController.js      # AI Chatbot, Recommendations
+│   ├── certController.js    # Certificate Issuance
+│   ├── leaderboardController.js # Leaderboard Rankings
+│   ├── offlineController.js # Offline Download Syncing
+│   ├── communityController.js # Peer Discussions, Mentorship
+├── middleware/
+│   ├── authMiddleware.js    # Role-based Access (Student/Mentor/Admin)
+│   ├── errorHandler.js      # Global Error Handling
+│   ├── rateLimiter.js       # API Rate Limiting
+├── models/
+│   ├── User.js              # User Schema (Students, Mentors)
+│   ├── Course.js            # Course Schema (Videos, Notes, Quizzes)
+│   ├── AIChat.js            # AI Chat History
+│   ├── Certificate.js       # Certificate Schema (Course Completion)
+│   ├── Leaderboard.js       # Points & Ranking System
+│   ├── Discussion.js        # Community Discussions
+│   ├── MentorMatch.js       # Mentor Matching Logic
+├── routes/
+│   ├── userRoutes.js        # /api/users (Auth, Profile)
+│   ├── courseRoutes.js      # /api/courses (Videos, Notes)
+│   ├── aiRoutes.js          # /api/ai (AI Chat, Recommendations)
+│   ├── certRoutes.js        # /api/certificates (Generate, Verify)
+│   ├── leaderboardRoutes.js # /api/leaderboard (Ranks)
+│   ├── offlineRoutes.js     # /api/offline (Download, Sync)
+│   ├── communityRoutes.js   # /api/community (Discussions, Mentorship)
+├── utils/
+│   ├── certificateHelper.js # PDF Certificate Generator
+│   ├── leaderboardHelper.js # Score Calculation Logic
+│   ├── aiHelper.js          # Claude API Wrapper
+│   ├── storageHelper.js     # Cloud Storage Helper (AWS/GCS)
+├── .env                     # Environment Variables (DB, API Keys)
+├── package.json             # Dependencies
+├── server.js                # Main Express App Setup
+```
+---
+
+## Backend Flow (Data Flow Explanation)
+
+1. **User Signup/Login**
+   - Users register & log in using JWT-based authentication.
+   - Role-based access (Student/Mentor/Admin) is managed.
+
+2. **Courses & Content**
+   - Admin uploads video courses, notes (Stored on Youtube).
+   - Students access video courses & downloadable PDFs.
+   - Offline mode enables downloads for later viewing.
+
+3. **AI-Powered Assistance**
+   - Students ask questions → Sent to Claude AI API.
+   - AI returns answers + personalized recommendations.
+
+4. **Gamification & Leaderboard**
+   - Students earn points by completing quizzes/courses.
+   - Leaderboard updates ranks based on learning activity.
+
+5. **Certificates & Rewards**
+   - On course completion, a PDF certificate is generated.
+   - Students receive rewards (discounts, badges, points).
+
+6. **Community & Mentorship**
+   - Peer discussions in forums (Discourse).
+   - Mentor-student matching for guidance.
+
+7. **Offline Support**
+   - Course materials are downloadable.
+   - Progress syncs once online.
+
+---
+
