@@ -1,11 +1,23 @@
 import React from "react";
-import { Button } from "./components/ui/button";
+import Navbar from "./components/Common/Navbar";
+import Footer from "./components/Common/Footer";
+import LandingPage from "./Pages/LandingPage";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Auth from "./Pages/Auth";
 
 const App = () => {
-  return <div>
-    <h1>Hello, Vite!</h1>
-    <Button>Click me</Button>
-  </div>;
+  return (
+    <Router>
+      <div className="">
+        <Navbar />
+        <Routes>
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
 };
 
 export default App;
