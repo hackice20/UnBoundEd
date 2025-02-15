@@ -4,6 +4,7 @@ import Footer from "./components/Common/Footer";
 import LandingPage from "./Pages/LandingPage";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Auth from "./Pages/Auth";
+import Certificate from "./Pages/Certificate";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/home" element={<LandingPage />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/certificate" element={<Certificate />} />
         </Routes>
         <Footer />
       </div>
