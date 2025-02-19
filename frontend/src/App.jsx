@@ -5,19 +5,28 @@ import LandingPage from "./Pages/LandingPage";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Auth from "./Pages/Auth";
 import Certificate from "./Pages/Certificate";
+import Dashboard from "./Pages/Dashboard";
+import { AuthProvider } from "./context/authContext";
+import ExploreCourses from "./Pages/ExploreCourses";
+import CoursePage from "./Pages/Course";
 
 const App = () => {
   return (
     <Router>
       <div className="">
+        <AuthProvider>
         <Navbar />
         <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<LandingPage />} />
-        <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/certificate" element={<Certificate />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/exploreCourses" element={<ExploreCourses />} />
+          <Route path="/course/:id" element={<CoursePage />} />
         </Routes>
         <Footer />
+        </AuthProvider>
       </div>
     </Router>
   );

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Menu, GraduationCap } from "lucide-react";
+import { AuthContext } from "@/context/authContext";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-[#FFFBF5]/80 backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,10 +44,19 @@ const Navbar = () => {
             >
               Contact
             </Link>
-
-            <Link to={"/auth"}>
-              <Button className="hover:bg-purple-600 bg-white text-black shadow-xl hover:text-white">Login</Button>
-            </Link>
+            {!user ? (
+              <Link to={"/auth"}>
+                <Button className="hover:bg-purple-600 bg-white text-black shadow-xl hover:text-white">
+                  Login
+                </Button>
+              </Link>
+            ) : (
+              <Link to={"/dashboard"}>
+                <Button className="hover:bg-purple-600 bg-white text-black shadow-xl hover:text-white">
+                  Dashboard
+                </Button>
+              </Link>
+            )}
           </div>
           <div className="md:hidden">
             <Button
