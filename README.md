@@ -195,3 +195,6 @@ Here's an **API guide** table based on the routes you've provided. This will all
 | POST            | `/api/quiz/{{quizId}}/attempt`       | User             | Submit quiz attempt                           | `Authorization: Bearer {{userToken}}` <br> `Content-Type: application/json` | `{ "answers": [ ...10 answers... ], "timeTaken": 290 }`               |
 
 ---
+## Get Leader Board
+
+localhost:3000/api/leaderboard
