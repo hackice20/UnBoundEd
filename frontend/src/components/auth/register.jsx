@@ -16,26 +16,6 @@ const Register = ({ setTab }) => {
       <div className="flex flex-col gap-3">
         <form className="flex flex-col gap-3 mt-5">
           <div className="flex flex-col">
-            <label className="font-semibold text-[16px] text-left">Name</label>
-            <Input
-              type="name"
-              className="w-full"
-              placeholder="John Doe"
-              name="name"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="font-semibold text-[16px] text-left">
-              User Name
-            </label>
-            <Input
-              type="userName"
-              className="w-full"
-              placeholder="johnDoe123"
-              name="userName"
-            />
-          </div>
-          <div className="flex flex-col">
             <label className="font-semibold text-[16px] text-left">
               Email Address
             </label>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -18,10 +19,12 @@ const Hero = () => {
               resources, expert-led courses, and innovative teaching methods.
             </p>
             <div className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/auth">
+                <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
+                  Get Started
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 size="lg"

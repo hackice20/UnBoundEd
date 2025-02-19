@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Login from "@/components/auth/login";
 import Register from "@/components/auth/register";
-import { SignIn, SignUp } from "@clerk/clerk-react";
 
 const Auth = () => {
   const [tab, setTab] = useState("login");
@@ -29,11 +28,11 @@ const Auth = () => {
             Register
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="login" className=" rounded-md">
-          <SignIn forceRedirectUrl="/home" />
+        <TabsContent value="login" className="bg-white p-5 rounded-md">
+          <Login />
         </TabsContent>
-        <TabsContent value="register" className=" rounded-md">
-          <SignUp forceRedirectUrl="/home" />
+        <TabsContent value="register" className="bg-white p-5 rounded-md">
+          <Register />
         </TabsContent>
       </Tabs>
     </div>

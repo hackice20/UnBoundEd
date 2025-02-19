@@ -2,12 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Menu, GraduationCap } from "lucide-react";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
 
 const Navbar = () => {
   return (
@@ -47,16 +41,7 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            <SignedOut>
-              <Link to={"/auth"}>
-                <Button className="bg-purple-600 hover:bg-purple-700">
-                  Sign Up
-                </Button>
-              </Link>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/home" />
-            </SignedIn>
+            
           </div>
           <div className="md:hidden">
             <Button
