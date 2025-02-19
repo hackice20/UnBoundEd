@@ -1,9 +1,48 @@
 import { GraduationCap } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setTab }) => {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:3000/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        sessionStorage.setItem("token", data.token);
+        setUser({
+          email: "",
+          password: "",
+        })
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col items-center justify-center">
@@ -15,7 +54,7 @@ const Login = ({ setTab }) => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <form className="flex flex-col gap-3 mt-5">
+        <form className="flex flex-col gap-3 mt-5" onSubmit={handleSubmit}>
           <div className="flex flex-col">
             <label className="font-semibold text-[16px] text-left">
               Email Address
@@ -25,6 +64,8 @@ const Login = ({ setTab }) => {
               className="w-full"
               placeholder="you@example.com"
               name="email"
+              onChange={handleChange}
+              value={user.email}
             />
           </div>
           <div className="flex flex-col">
@@ -36,6 +77,8 @@ const Login = ({ setTab }) => {
               className="w-full"
               placeholder="••••••••"
               name="password"
+              onChange={handleChange}
+              value={user.password}
             />
           </div>
 
@@ -51,9 +94,14 @@ const Login = ({ setTab }) => {
         <div className="mt-1">
           <p className="text-center">
             Don't have an account?{" "}
-            <span className="text-purple-600 font-semibold cursor-pointer" onClick={() => {
+            <span
+              className="text-purple-600 font-semibold cursor-pointer"
+              onClick={() => {
                 setTab("register");
-            }}>Register Now</span>
+              }}
+            >
+              Register Now
+            </span>
           </p>
         </div>
       </div>

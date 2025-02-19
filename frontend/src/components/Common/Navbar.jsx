@@ -41,7 +41,10 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            
+
+            <Link to={"/auth"}>
+              <Button className="hover:bg-purple-600 bg-white text-black shadow-xl hover:text-white">Login</Button>
+            </Link>
           </div>
           <div className="md:hidden">
             <Button

@@ -29,10 +29,10 @@ const Auth = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="login" className="bg-white p-5 rounded-md">
-          <Login />
+          <Login setTab={setTab}/>
         </TabsContent>
         <TabsContent value="register" className="bg-white p-5 rounded-md">
-          <Register />
+          <Register setTab={setTab}/>
         </TabsContent>
       </Tabs>
     </div>

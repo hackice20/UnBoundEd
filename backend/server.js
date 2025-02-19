@@ -1,5 +1,6 @@
 // server.js
 import express from 'express';
+import cors from 'cors';
 import dbConnect from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
@@ -8,6 +9,16 @@ import certificateRoutes from './routes/certificateRoutes.js';
 import quizRoutes from './routes/quizRoutes.js';
 
 const app = express();
+
+// CORS configuration
+const corsOptions = {
+  origin: 'http://localhost:5173', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
