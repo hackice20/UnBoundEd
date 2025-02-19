@@ -184,3 +184,14 @@ Here's an **API guide** table based on the routes you've provided. This will all
    - The `GET /api/certificate` returns a **PDF certificate** upon success.
 
 ---
+## API Testing Table Summary
+
+| **HTTP Method** | **Endpoint**                         | **Role**         | **Description**                               | **Headers**                                            | **Sample Body**                                                     |
+|-----------------|--------------------------------------|------------------|-----------------------------------------------|--------------------------------------------------------|---------------------------------------------------------------------|
+| POST            | `/api/auth/admin/login`              | Admin            | Admin login to get JWT token                  | `Content-Type: application/json`                       | `{ "email": "admin@example.com", "password": "adminpassword" }`       |
+| POST            | `/api/quiz`                          | Admin            | Create a new quiz                             | `Authorization: Bearer {{adminToken}}` <br> `Content-Type: application/json` | JSON with quiz details (see Create Quiz sample above)               |
+| GET             | `/api/quiz/{{quizId}}`               | Public           | Get details of a quiz                         | None (or with token)                                   | –                                                                   |
+| POST            | `/api/auth/users/login`              | User             | User login to get JWT token                   | `Content-Type: application/json`                       | `{ "email": "user@example.com", "password": "userpass123" }`          |
+| POST            | `/api/quiz/{{quizId}}/attempt`       | User             | Submit quiz attempt                           | `Authorization: Bearer {{userToken}}` <br> `Content-Type: application/json` | `{ "answers": [ ...10 answers... ], "timeTaken": 290 }`               |
+
+---
