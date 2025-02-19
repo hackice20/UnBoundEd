@@ -62,104 +62,53 @@ consumption and maximum engagement. 🚀
      
 ---
 
-## Resources and Libraries:
 
-1. **User Authentication and Authorization:**
-   - **Passport.js:** A flexible authentication middleware for Node.js, supporting various strategies including local authentication and OAuth.
-   - **JSON Web Token (JWT):** For secure token-based authentication.
-
-2. **Offline Support:**
-   - **PouchDB:** A JavaScript database that enables offline storage and synchronization with a CouchDB-compatible server.
-   - **Service Workers:** Utilize service workers to cache assets and manage offline capabilities.
-
-3. **AI-Powered Assistance:**
-   - **Claude AI API:** Integrate the Claude AI API for natural language understanding and personalized responses.
-   - **TensorFlow.js:** For running machine learning models directly in the browser.
-
-4. **Lightweight UI & Optimized Performance:**
-   - **React:** A library for building user interfaces, known for its efficiency and flexibility.
-   - **React Lazy Load:** To defer loading of off-screen components, improving initial load performance.
-   - **Lighthouse:** A tool for auditing performance and accessibility, guiding optimizations.
-
-5. **Micro-Certifications & Leaderboard:**
-   - **Badgr API:** For issuing and managing digital badges and micro-certifications.
-   - **Leaderboard.js:** To implement and manage gamified leaderboards.
-
-6. **Learn-to-Earn Model:**
-   - **Incentive Program Module:** Custom development of a module to manage rewards and incentives, possibly integrating with existing e-commerce platforms for discounts.
-
-7. **Community Support:**
-   - **Discourse:** An open-source discussion platform that can be integrated for forums.
-   - **Socket.io:** For real-time communication features like chat and notifications.
-   - **Mentorship Matching Algorithm:** Develop a custom algorithm to match mentors and mentees based on preferences and expertise.
-   
----
 
 ## Backend Stack & Libraries
 
-| Feature                    | Tech Stack / Library |
-|----------------------------|----------------------|
-| **Authentication**         | Passport.js, JWT, bcrypt |
-| **Database**               | MongoDB, Mongoose |
-| **API Framework**          | Express.js |
-| **AI Chatbot**             | Claude AI API |
-| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |
-| **Video Storage**          | Youtube |
+| Feature                    | Tech Stack / Library | Status |
+|----------------------------|----------------------|--------|
+| **Authentication**         | Passport.js, JWT, bcrypt |done|
+| **Database**               | MongoDB, Mongoose |done|
+| **API Framework**          | Express.js |done|
+| **AI Chatbot**             | Claude AI API |pending...|
+| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |pending...|
+| **Video Storage**          | Youtube |done|semi|
 | **Certificate Generation** | pdfkit, node-html-pdf |
-| **Offline Syncing**        | PouchDB, Workbox (Service Workers) |
-| **Community Features**     | Socket.io, Discourse Integration |
-| **Gamification & Rewards** | Custom Rewards Logic |
+| **Offline Syncing**        | PouchDB, Workbox (Service Workers) |pending...|
+| **Community Features**     | Socket.io, Discourse Integration |done|
+| **Gamification & Rewards** | Custom Rewards Logic |pending...|
 
 ---
 
 ## Backend Project Structure
 
 ```
-backend/
-├── config/
-│   ├── db.js                # Database Connection (MongoDB)
-│   ├── cloudStorage.js      # Cloud Storage Config (AWS/GCS)
-│   ├── aiConfig.js          # Claude AI API Config
-│   ├── auth.js              # JWT Authentication Setup
-│   ├── certConfig.js        # Certificate Generation Setup
-│   ├── leaderboardConfig.js # Leaderboard Logic
-│   ├── offlineMode.js       # Offline Storage Config
-├── controllers/
-│   ├── userController.js    # User Authentication, Profile Management
-│   ├── courseController.js  # Course CRUD (Videos, Notes)
-│   ├── aiController.js      # AI Chatbot, Recommendations
-│   ├── certController.js    # Certificate Issuance
-│   ├── leaderboardController.js # Leaderboard Rankings
-│   ├── offlineController.js # Offline Download Syncing
-│   ├── communityController.js # Peer Discussions, Mentorship
-├── middleware/
-│   ├── authMiddleware.js    # Role-based Access (Student/Mentor/Admin)
-│   ├── errorHandler.js      # Global Error Handling
-│   ├── rateLimiter.js       # API Rate Limiting
-├── models/
-│   ├── User.js              # User Schema (Students, Mentors)
-│   ├── Course.js            # Course Schema (Videos, Notes, Quizzes)
-│   ├── AIChat.js            # AI Chat History
-│   ├── Certificate.js       # Certificate Schema (Course Completion)
-│   ├── Leaderboard.js       # Points & Ranking System
-│   ├── Discussion.js        # Community Discussions
-│   ├── MentorMatch.js       # Mentor Matching Logic
-├── routes/
-│   ├── userRoutes.js        # /api/users (Auth, Profile)
-│   ├── courseRoutes.js      # /api/courses (Videos, Notes)
-│   ├── aiRoutes.js          # /api/ai (AI Chat, Recommendations)
-│   ├── certRoutes.js        # /api/certificates (Generate, Verify)
-│   ├── leaderboardRoutes.js # /api/leaderboard (Ranks)
-│   ├── offlineRoutes.js     # /api/offline (Download, Sync)
-│   ├── communityRoutes.js   # /api/community (Discussions, Mentorship)
-├── utils/
-│   ├── certificateHelper.js # PDF Certificate Generator
-│   ├── leaderboardHelper.js # Score Calculation Logic
-│   ├── aiHelper.js          # Claude API Wrapper
-│   ├── storageHelper.js     # Cloud Storage Helper (AWS/GCS)
-├── .env                     # Environment Variables (DB, API Keys)
-├── package.json             # Dependencies
-├── server.js                # Main Express App Setup
+/UnBoundEd
+   ├── /frontend
+   ├── /backend
+      ├── package.json
+      ├── server.js
+      ├── config
+      │   ├── config.js         // config constants (JWT secret, etc.)
+      │   └── db.js             // MongoDB connection
+      ├── models
+      │   ├── User.js           // User model (for auth)
+      │   ├── Admin.js          // Admin model (for auth)
+      │   └── Course.js         // Course model
+      ├── controllers
+      │   ├── authController.js // Auth logic for users
+      │   ├── adminController.js// Auth logic for admins
+      │   └── courseController.js // CRUD for courses and certificate API
+      ├── middleware
+      │   └── authMiddleware.js // JWT validation and role-checking
+      ├── routes
+      │   ├── authRoutes.js     // Public user auth endpoints
+      │   ├── adminRoutes.js    // Public admin auth endpoints
+      │   ├── courseRoutes.js   // CRUD endpoints for courses (admin only for create/update/delete)
+      │   └── certificateRoutes.js // GET endpoint for certificate data
+ ├──Readme.md
+
 ```
 ---
 
@@ -196,3 +145,53 @@ backend/
 
 ---
 
+## API routes
+
+Here's an **API guide** table based on the routes you've provided. This will allow your team to fetch these APIs on the frontend easily.
+
+**BASE URL - localhost:3000**
+
+| **HTTP Method** | **API Endpoint**                    | **Description**                                                            | **Authentication Required** | **Role Required** | **Parameters**                           | **Response**              |
+|-----------------|-------------------------------------|----------------------------------------------------------------------------|-----------------------------|-------------------|------------------------------------------|---------------------------|
+| **POST**        | `/api/auth/register`               | Register a new admin                                                        | No                          | Admin             | `username`, `password`, `email`          | 201 Created               |
+| **POST**        | `/api/auth/login`                  | Login as an admin                                                            | No                          | None              | `username`, `password`                   | 200 OK, JWT Token         |
+| **GET**         | `/api/admin/dashboard`             | Get the admin dashboard details                                              | Yes                         | Admin             | None                                     | 200 OK                    |
+| **POST**        | `/api/users/register`              | Register a new user                                                          | No                          | User              | `username`, `password`, `email`          | 201 Created               |
+| **POST**        | `/api/users/login`                 | Login as a user                                                              | No                          | None              | `username`, `password`                   | 200 OK, JWT Token         |
+| **GET**         | `/api/users/dashboard`             | Get the user dashboard details                                                | Yes                         | User              | None                                     | 200 OK                    |
+| **GET**         | `/api/certificate`                 | Generate certificate for a course                                            | Yes                         | User/Admin        | `username`, `courseName`                 | 200 OK, PDF Certificate   |
+| **GET**         | `/api/courses`                     | Get a list of all available courses                                          | No                          | None              | None                                     | 200 OK                    |
+| **GET**         | `/api/courses/:id`                 | Get course details by course ID                                              | No                          | None              | `id`                                     | 200 OK                    |
+| **POST**        | `/api/courses`                     | Create a new course (Admin only)                                             | Yes                         | Admin             | `courseName`, `youtubeLinks`, `quizLink`, `discordLink` | 201 Created               |
+| **PUT**         | `/api/courses/:id`                 | Update course details (Admin only)                                           | Yes                         | Admin             | `id`, `courseName`, `youtubeLinks`, `quizLink`, `discordLink` | 200 OK                    |
+| **DELETE**      | `/api/courses/:id`                 | Delete a course by course ID (Admin only)                                     | Yes                         | Admin             | `id`                                     | 200 OK                    |
+
+---
+
+### **Explanation:**
+1. **Authentication & Authorization**:
+   - For **public routes** (e.g., `GET /api/courses` and `GET /api/courses/:id`), no authentication is needed.
+   - **Admin routes** (e.g., `POST /api/courses` and `PUT /api/courses/:id`) require **authentication** (JWT token) and **admin privileges** (`isAdmin` middleware).
+
+2. **Parameters**:
+   - `username`, `password`, `email` for login and registration.
+   - `courseName`, `youtubeLinks`, `quizLink`, and `discordLink` for course creation and updates.
+   - `courseName` and `username` for generating certificates.
+
+3. **Response**:
+   - Most API calls return a `200 OK` status along with the required data (e.g., course list, certificate).
+   - The `POST` requests for creating a course or user will return a `201 Created` status.
+   - The `GET /api/certificate` returns a **PDF certificate** upon success.
+
+---
+## API Testing Table Summary
+
+| **HTTP Method** | **Endpoint**                         | **Role**         | **Description**                               | **Headers**                                            | **Sample Body**                                                     |
+|-----------------|--------------------------------------|------------------|-----------------------------------------------|--------------------------------------------------------|---------------------------------------------------------------------|
+| POST            | `/api/auth/admin/login`              | Admin            | Admin login to get JWT token                  | `Content-Type: application/json`                       | `{ "email": "admin@example.com", "password": "adminpassword" }`       |
+| POST            | `/api/quiz`                          | Admin            | Create a new quiz                             | `Authorization: Bearer {{adminToken}}` <br> `Content-Type: application/json` | JSON with quiz details (see Create Quiz sample above)               |
+| GET             | `/api/quiz/{{quizId}}`               | Public           | Get details of a quiz                         | None (or with token)                                   | –                                                                   |
+| POST            | `/api/auth/users/login`              | User             | User login to get JWT token                   | `Content-Type: application/json`                       | `{ "email": "user@example.com", "password": "userpass123" }`          |
+| POST            | `/api/quiz/{{quizId}}/attempt`       | User             | Submit quiz attempt                           | `Authorization: Bearer {{userToken}}` <br> `Content-Type: application/json` | `{ "answers": [ ...10 answers... ], "timeTaken": 290 }`               |
+
+---
