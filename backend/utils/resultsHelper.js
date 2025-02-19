@@ -1,0 +1,46 @@
+import fs from 'fs';
+import path from 'path';
+
+const resultsFile = path.join(process.cwd(), 'results.json');
+
+// Initialize the results file if it doesn't exist.
+if (!fs.existsSync(resultsFile)) {
+  fs.writeFileSync(resultsFile, JSON.stringify([]));
+}
+
+/**
+ * Append a new test result to the results file.
+ * @param {Object} result - The test result object.
+ */
+export const addTestResult = (result) => {
+  try {
+    const data = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
+    data.push(result);
+    fs.writeFileSync(resultsFile, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error('Error updating results file:', error);
+  }
+};
+
+/**
+ * Retrieve and sort leaderboard data.
+ * Filters to only include passed attempts, then sorts by score (desc) and timeTaken (asc).
+ * @returns {Array} Sorted leaderboard array.
+ */
+export const getLeaderboard = () => {
+  try {
+    const data = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
+    // Filter to include only passed attempts.
+    const leaderboard = data.filter((r) => r.passed)
+      .sort((a, b) => {
+        if (b.score === a.score) {
+          return a.timeTaken - b.timeTaken; // lower time wins if scores are equal.
+        }
+        return b.score - a.score;
+      });
+    return leaderboard;
+  } catch (error) {
+    console.error('Error reading results file:', error);
+    return [];
+  }
+};

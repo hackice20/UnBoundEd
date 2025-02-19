@@ -1,6 +1,7 @@
 // backend/controllers/quizController.js
 import Quiz from '../models/Quiz.js';
 import Course from '../models/Course.js';
+import { addTestResult } from '../utils/resultsHelper.js';
 
 export const createQuiz = async (req, res) => {
   try {
@@ -80,6 +81,17 @@ export const attemptQuiz = async (req, res) => {
     
     const scorePercentage = (correctCount / 10) * 100;
     const passed = scorePercentage >= 70;
+
+    const result = {
+      userId: req.user.id,                // Assuming req.user is set from auth middleware
+      username: req.user.email,           // Or a username field if available
+      quizId: req.params.id,
+      score: scorePercentage,
+      timeTaken,
+      passed,
+      date: new Date()
+    };
+    addTestResult(result);
     
     res.json({
       score: scorePercentage,

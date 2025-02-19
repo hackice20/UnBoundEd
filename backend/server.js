@@ -6,6 +6,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import certificateRoutes from './routes/certificateRoutes.js';
 import quizRoutes from './routes/quizRoutes.js';
+import leaderboardRoutes from './routes/leaderboardRoutes.js';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/certificate', certificateRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
 
 // 404 Handler
 app.use((req, res) => {
