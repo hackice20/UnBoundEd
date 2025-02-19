@@ -7,7 +7,18 @@ const courseSchema = new mongoose.Schema(
     description: { type: String },
     youtubePlaylist: { type: String },
     quiz: { type: mongoose.Schema.Types.ObjectId, ref: 'Quiz' },
-    discordServerLink: { type: String }
+    discordServerLink: { type: String },
+    rating : {type : Number, default : 0},
+    price : {type : Number, default : 0, required : true},
+    thumbnail : {type : String},
+    instructor : {type : mongoose.Schema.Types.ObjectId, ref : "Admin", required : true},
+    boughtBy : [{type : mongoose.Schema.Types.ObjectId, ref : "User"}],
+    ratings: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        rating: { type: Number, required: true, min: 1, max: 5 }
+      }
+    ],
   },
   { timestamps: true }
 );

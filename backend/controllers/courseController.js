@@ -1,11 +1,12 @@
 // controllers/courseController.js
+import mongoose from 'mongoose';
 import Course from '../models/Course.js';
 
 // Admin: Create a new course
 export const createCourse = async (req, res) => {
   try {
-    const { title, description, youtubePlaylist, googleQuizLink, discordServerLink } = req.body;
-    const newCourse = new Course({ title, description, youtubePlaylist, googleQuizLink, discordServerLink });
+    const { title, description, youtubePlaylist, googleQuizLink, discordServerLink, price, thumbnail, instructor } = req.body;
+    const newCourse = new Course({ title, description, youtubePlaylist, googleQuizLink, discordServerLink, price, thumbnail, instructor });
     await newCourse.save();
     res.status(201).json({ message: 'Course created successfully', course: newCourse });
   } catch (err) {
@@ -77,4 +78,98 @@ export const getCertificate = async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
+};
+
+
+
+// purchasing the course
+export const purchaseCourse = async (req, res) => {
+    try {
+        const courseId = req.params.id;
+        const userId = req.user.id; 
+        
+        if (!userId) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+        if (course.boughtBy.some(user => user.equals(userObjectId))) {
+            return res.status(400).json({ message: 'You already purchased this course' });
+        }
+
+        course.boughtBy.push(userObjectId);
+        await course.save();
+        
+        res.status(200).json({ 
+            message: 'Course purchased successfully', 
+            course 
+        });
+    } catch (err) {
+        console.error('Purchase course error:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+// rating the courses
+export const rateCourse = async (req, res) => {
+    try {
+        const courseId = req.params.id;  
+        const userId = req.user.id;
+        const { rating } = req.body;
+
+        if (!rating) {
+            return res.status(400).json({ message: 'Rating is required' });
+        }
+
+        const ratingNumber = Number(rating);
+        if (isNaN(ratingNumber) || ratingNumber < 1 || ratingNumber > 5) {
+            return res.status(400).json({ message: 'Rating must be a number between 1 and 5' });
+        }
+
+        const course = await Course.findById(courseId);
+
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+        
+        if (!course.boughtBy.some(id => id.equals(userObjectId))) {
+            return res.status(403).json({ message: 'You must purchase this course to rate it' });
+        }
+
+        const existingRatingIndex = course.ratings.findIndex(r => r.user.equals(userObjectId));
+        
+        if (existingRatingIndex !== -1) {
+            course.ratings[existingRatingIndex].rating = ratingNumber;
+        } else {
+            course.ratings.push({ user: userObjectId, rating: ratingNumber });
+        }
+
+        const totalRatings = course.ratings.length;
+        if (totalRatings > 0) {
+            course.averageRating = (course.ratings.reduce((sum, r) => sum + r.rating, 0) / totalRatings).toFixed(1);
+        }
+
+        await course.save();
+        
+        res.status(200).json({ 
+            message: 'Course rated successfully', 
+            course: {
+                id: course._id,
+                title: course.title,
+                averageRating: course.averageRating,
+                totalRatings: totalRatings
+            }
+        });
+    } catch (err) {
+        console.error('Rate course error:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
 };
