@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import certificateRoutes from './routes/certificateRoutes.js';
+import quizRoutes from './routes/quizRoutes.js';
 
 const app = express();
 
@@ -17,6 +18,7 @@ dbConnect();
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/quiz', quizRoutes);
 app.use('/api/certificate', certificateRoutes);
 
 // 404 Handler
