@@ -147,7 +147,7 @@ export default function AdminDashboard() {
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-slate-800">Dashboard</h1>
           <div className="flex items-center gap-4">
-            <Link to="/admin/createCourses">
+            <Link to="/admin/createCourse">
               <Button className="bg-purple-600 hover:bg-purple-700">
                 <Plus className="mr-2 h-4 w-4" /> Add Course
               </Button>
