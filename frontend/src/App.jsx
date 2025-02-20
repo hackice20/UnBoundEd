@@ -9,23 +9,25 @@ import Dashboard from "./Pages/Dashboard";
 import { AuthProvider } from "./context/authContext";
 import ExploreCourses from "./Pages/ExploreCourses";
 import CoursePage from "./Pages/Course";
+import AdminDashboard from "./Pages/Admin/Dashboard";
 
 const App = () => {
   return (
     <Router>
       <div className="">
         <AuthProvider>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<LandingPage />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/certificate" element={<Certificate />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/exploreCourses" element={<ExploreCourses />} />
-          <Route path="/course/:id" element={<CoursePage />} />
-        </Routes>
-        <Footer />
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={<LandingPage />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/certificate" element={<Certificate />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/exploreCourses" element={<ExploreCourses />} />
+            <Route path="/course/:id" element={<CoursePage />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          </Routes>
+          <Footer />
         </AuthProvider>
       </div>
     </Router>
