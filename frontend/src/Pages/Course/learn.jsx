@@ -244,14 +244,16 @@ export default function CourseLearningPage() {
         </div>
 
         {/* Video Player */}
-        <div className="aspect-video w-[60vw] bg-black">
-          <iframe
-            src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=0&rel=0`}
-            title="Course Video"
-            className="object-cover w-[60vw] h-full" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+        <div className="flex w-full items-center justify-center">
+          <div className="aspect-video w-[60vw] bg-black">
+            <iframe
+              src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=0&rel=0`}
+              title="Course Video"
+              className="object-cover w-[60vw] h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
 
         <Separator className="my-3" />
