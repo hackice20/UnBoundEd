@@ -2,13 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Clock, Search, Star, PlayCircle } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CourseCard from "@/components/Course/CourseCard";
+import { AuthContext } from "@/context/authContext";
 
 export default function DashboardPage() {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const navigate = useNavigate();
-
+  const {user} = useContext(AuthContext);
+  
   const enrolledCourses = [
     {
       id: 1,
