@@ -37,7 +37,7 @@ const Login = ({ setTab }) => {
           email: "",
           password: "",
         })
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error:", error);
