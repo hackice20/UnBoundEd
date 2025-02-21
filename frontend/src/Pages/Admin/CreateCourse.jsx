@@ -22,10 +22,8 @@ export default function CreateCoursePage() {
       title: "",
       description: "",
       youtubePlaylist: "",
-      googleQuizLink: "",
       discordServerLink: "",
       price: 0,
-      instructor: "",
       category: "",
     },
   });
