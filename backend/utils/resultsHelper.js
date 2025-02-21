@@ -1,5 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+<<<<<<< HEAD
+=======
+import Quiz from '../models/Quiz.js';
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
 
 const resultsFile = path.join(process.cwd(), 'results.json');
 
@@ -23,6 +27,7 @@ export const addTestResult = (result) => {
 };
 
 /**
+<<<<<<< HEAD
  * Retrieve and sort leaderboard data.
  * Filters to only include passed attempts, then sorts by score (desc) and timeTaken (asc).
  * @returns {Array} Sorted leaderboard array.
@@ -32,12 +37,36 @@ export const getLeaderboard = () => {
     const data = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
     // Filter to include only passed attempts.
     const leaderboard = data.filter((r) => r.passed)
+=======
+ * Retrieve and sort leaderboard data for a given course.
+ * Filters to only include passed attempts for quizzes belonging to the course,
+ * then sorts by score (desc) and timeTaken (asc).
+ * @param {String} courseId - The course identifier.
+ * @returns {Array} Sorted leaderboard array.
+ */
+export const getLeaderboard = async (courseId) => {
+  try {
+    // Read all stored results.
+    const data = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
+
+    // Retrieve quizzes for the specified course.
+    const quizzes = await Quiz.find({ course: courseId }).select('_id');
+    const quizIds = quizzes.map((q) => q._id.toString());
+
+    // Filter results: passed attempts and matching quiz IDs.
+    const leaderboard = data
+      .filter((r) => r.passed && quizIds.includes(r.quizId))
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
       .sort((a, b) => {
         if (b.score === a.score) {
           return a.timeTaken - b.timeTaken; // lower time wins if scores are equal.
         }
         return b.score - a.score;
       });
+<<<<<<< HEAD
+=======
+
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
     return leaderboard;
   } catch (error) {
     console.error('Error reading results file:', error);

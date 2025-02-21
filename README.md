@@ -72,9 +72,15 @@ consumption and maximum engagement. 🚀
 | **Database**               | MongoDB, Mongoose |done|
 | **API Framework**          | Express.js |done|
 | **AI Chatbot**             | Claude AI API |pending...|
+<<<<<<< HEAD
+| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |done|
+| **Video Storage**          | Youtube |done|done|
+| **Certificate Generation** | pdfkit, node-html-pdf |done|
+=======
 | **Leaderboard System**     | Custom Logic + MongoDB Aggregation |pending...|
 | **Video Storage**          | Youtube |done|semi|
 | **Certificate Generation** | pdfkit, node-html-pdf |
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
 | **Offline Syncing**        | PouchDB, Workbox (Service Workers) |pending...|
 | **Community Features**     | Socket.io, Discourse Integration |done|
 | **Gamification & Rewards** | Custom Rewards Logic |pending...|
@@ -88,6 +94,29 @@ consumption and maximum engagement. 🚀
    ├── /frontend
    ├── /backend
       ├── package.json
+<<<<<<< HEAD
+      ├── package-lock.json
+      ├── result.json //stores results of Quizzes for leaderboard
+      ├── .gitignore
+      ├── server.js
+      ├──/ config
+      │   ├── config.js         // config constants (JWT secret, etc.)
+      │   └── db.js             // MongoDB connection
+      ├──/ models
+      │   ├── User.js           // User model (for auth)
+      │   ├── Admin.js         // Admin model (for auth)
+      |   ├── Quiz.js          //Quiz model(array of questions, options array ,time limit )
+      │   └── Course.js         // Course model
+      ├──/ controllers
+      │   ├── authController.js // Auth logic for users
+      │   ├── adminController.js // Auth logic for admins
+      |   ├── quizController.js // CRUD 
+      |   ├── leaderboardController.js
+      │   └── courseController.js // CRUD for courses and certificate API
+      ├──/ middleware
+      │   └── authMiddleware.js // JWT validation and role-checking
+      ├──/ routes
+=======
       ├── server.js
       ├── config
       │   ├── config.js         // config constants (JWT secret, etc.)
@@ -103,11 +132,20 @@ consumption and maximum engagement. 🚀
       ├── middleware
       │   └── authMiddleware.js // JWT validation and role-checking
       ├── routes
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
       │   ├── authRoutes.js     // Public user auth endpoints
       │   ├── adminRoutes.js    // Public admin auth endpoints
       │   ├── courseRoutes.js   // CRUD endpoints for courses (admin only for create/update/delete)
       │   └── certificateRoutes.js // GET endpoint for certificate data
+<<<<<<< HEAD
+      |   ├── leaderboardRoutes.js //GET Leaderboard
+      |   ├── quizRoutes.js //create Quiz,Update,Delete(isAdmin) || attemptQuiz (User)
+      ├──/ utils
+          └── resultHelper.js
+  ├──Readme.md
+=======
  ├──Readme.md
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
 
 ```
 ---
@@ -197,4 +235,11 @@ Here's an **API guide** table based on the routes you've provided. This will all
 ---
 ## Get Leader Board
 
+<<<<<<< HEAD
+localhost:3000/api/leaderboard/<courseId>
+
+## API KEY
+GEMINI_API_KEY = AIzaSyC1ZLy_olVsr-ItHdv5nSdM7K4ewbO-zYQ
+=======
 localhost:3000/api/leaderboard
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
