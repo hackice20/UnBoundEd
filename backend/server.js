@@ -8,6 +8,10 @@ import courseRoutes from './routes/courseRoutes.js';
 import certificateRoutes from './routes/certificateRoutes.js';
 import quizRoutes from './routes/quizRoutes.js';
 import leaderboardRoutes from './routes/leaderboardRoutes.js';
+<<<<<<< HEAD
+=======
+import chatbotRoutes from './routes/chatbotRoutes.js';
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
 
 const app = express();
 
@@ -33,6 +37,10 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/certificate', certificateRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
+<<<<<<< HEAD
+=======
+app.use('/api/chatbot', chatbotRoutes);
+>>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
 
 // 404 Handler
 app.use((req, res) => {
