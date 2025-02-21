@@ -10,42 +10,51 @@ export default function DashboardPage() {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const navigate = useNavigate();
   const {user} = useContext(AuthContext);
+  const [enrolledCourses, setEnrolledCoures] = useState([]);
   
-  const enrolledCourses = [
-    {
-      id: 1,
-      title: "Advanced Mathematics",
-      instructor: "Dr. Sarah Johnson",
-      progress: 65,
-      totalLessons: 24,
-      completedLessons: 16,
-      image:
-        "https://res.cloudinary.com/drn8ou2tw/image/upload/v1739958471/Code_With_Harry_-_Sigma_Batch_ai0aem.jpg",
-      lastAccessed: "2 days ago",
-    },
-    {
-      id: 2,
-      title: "Introduction to Physics",
-      instructor: "Prof. Michael Chen",
-      progress: 32,
-      totalLessons: 18,
-      completedLessons: 6,
-      image:
-        "https://res.cloudinary.com/drn8ou2tw/image/upload/v1739958471/Code_With_Harry_-_Sigma_Batch_ai0aem.jpg",
-      lastAccessed: "5 days ago",
-    },
-    {
-      id: 3,
-      title: "World History",
-      instructor: "Dr. Emily Williams",
-      progress: 89,
-      totalLessons: 30,
-      completedLessons: 27,
-      image:
-        "https://res.cloudinary.com/drn8ou2tw/image/upload/v1739958471/Code_With_Harry_-_Sigma_Batch_ai0aem.jpg",
-      lastAccessed: "1 day ago",
-    },
-  ];
+  const getEnrolledCourse = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/courses/`)
+    } catch (error) {
+      
+    }
+  }
+
+  // const enrolledCourses = [
+  //   {
+  //     id: 1,
+  //     title: "Advanced Mathematics",
+  //     instructor: "Dr. Sarah Johnson",
+  //     progress: 65,
+  //     totalLessons: 24,
+  //     completedLessons: 16,
+  //     image:
+  //       "https://res.cloudinary.com/drn8ou2tw/image/upload/v1739958471/Code_With_Harry_-_Sigma_Batch_ai0aem.jpg",
+  //     lastAccessed: "2 days ago",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Introduction to Physics",
+  //     instructor: "Prof. Michael Chen",
+  //     progress: 32,
+  //     totalLessons: 18,
+  //     completedLessons: 6,
+  //     image:
+  //       "https://res.cloudinary.com/drn8ou2tw/image/upload/v1739958471/Code_With_Harry_-_Sigma_Batch_ai0aem.jpg",
+  //     lastAccessed: "5 days ago",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "World History",
+  //     instructor: "Dr. Emily Williams",
+  //     progress: 89,
+  //     totalLessons: 30,
+  //     completedLessons: 27,
+  //     image:
+  //       "https://res.cloudinary.com/drn8ou2tw/image/upload/v1739958471/Code_With_Harry_-_Sigma_Batch_ai0aem.jpg",
+  //     lastAccessed: "1 day ago",
+  //   },
+  // ];
 
   const fetchRecommendedCourses = async () => {
     try {
