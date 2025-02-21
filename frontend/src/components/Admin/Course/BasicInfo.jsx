@@ -1,26 +1,47 @@
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@radix-ui/react-select";
 const CourseContent = ({ form }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Course Content</CardTitle>
-        <CardDescription>Add your course content and resources</CardDescription>
+        <CardTitle>Basic Information</CardTitle>
+        <CardDescription>
+          Provide the basic details about your course
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <FormField
           control={form.control}
-          name="youtubePlaylist"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>YouTube Playlist URL</FormLabel>
+              <FormLabel>Course Title</FormLabel>
               <FormControl>
-                <Input placeholder="https://youtube.com/playlist?list=..." {...field} />
+                <Input placeholder="Enter course title" {...field} />
               </FormControl>
-              <FormDescription>Link to your course video playlist</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -28,33 +49,52 @@ const CourseContent = ({ form }) => {
 
         <FormField
           control={form.control}
-          name="googleQuizLink"
+          name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Google Quiz Link</FormLabel>
+              <FormLabel>Course Description</FormLabel>
               <FormControl>
-                <Input placeholder="https://forms.google.com/..." {...field} />
+                <Textarea
+                  placeholder="Enter course description"
+                  className="min-h-[150px]"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>Link to your course assessments</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="discordServerLink"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Discord Server Link</FormLabel>
-              <FormControl>
-                <Input placeholder="https://discord.gg/..." {...field} />
-              </FormControl>
-              <FormDescription>Link to your course community</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+<FormField
+  control={form.control}
+  name="category"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Category</FormLabel>
+      <Select
+        onValueChange={field.onChange}
+        value={field.value || ""}
+        defaultValue={field.value || "development"}
+      >
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+          <SelectItem value="development">Development</SelectItem>
+          <SelectItem value="business">Business</SelectItem>
+          <SelectItem value="design">Design</SelectItem>
+          <SelectItem value="marketing">Marketing</SelectItem>
+          <SelectItem value="music">Music</SelectItem>
+        </SelectContent>
+      </Select>
+      <FormDescription>Choose the most relevant category</FormDescription>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
       </CardContent>
     </Card>
   );
