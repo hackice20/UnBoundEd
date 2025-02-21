@@ -17,17 +17,17 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Courses
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Resources
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Blog
                 </Link>
               </li>
@@ -37,17 +37,17 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/admin/auth" className="hover:text-white">
+                <Link to="/admin/auth" className="hover:text-white">
                   Admin Login
                 </Link>
               </li>
@@ -57,12 +57,12 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link to="#" className="hover:text-white">
                   Terms of Service
                 </Link>
               </li>

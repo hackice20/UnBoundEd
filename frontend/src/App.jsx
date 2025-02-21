@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import Navbar from "./components/Common/Navbar";
 import Footer from "./components/Common/Footer";
 import LandingPage from "./Pages/LandingPage";
@@ -14,6 +14,7 @@ import CreateCourse from "./Pages/Admin/CreateCourse";
 import CourseLearningPage from "./Pages/Course/learn";
 import AdminAuth from "./Pages/Admin/Auth";
 import CreateQuiz from "./Pages/Admin/CreateQuiz";
+import ProtectedRoute from "./components/Common/ProtectedRoutes";
 
 const App = () => {
   return (
@@ -29,11 +30,34 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/exploreCourses" element={<ExploreCourses />} />
             <Route path="/course/:id" element={<CoursePage />} />
-            <Route path="/learn" element={<CourseLearningPage/>} />
+            <Route path="/learn" element={<CourseLearningPage />} />
             <Route path="/admin/auth" element={<AdminAuth />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/createCourse" element={<CreateCourse />} />
-            <Route path="/admin/:id/createQuiz" element={<CreateQuiz />} />
+
+            {/* Protected Admin Routes */}
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/createCourse" 
+              element={
+                <ProtectedRoute>
+                  <CreateCourse />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/admin/:id/createQuiz" 
+              element={
+                <ProtectedRoute>
+                  <CreateQuiz />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
           <Footer />
         </AuthProvider>
