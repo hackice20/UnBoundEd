@@ -26,20 +26,6 @@ const CourseContent = ({ form }) => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="googleQuizLink"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Google Quiz Link</FormLabel>
-              <FormControl>
-                <Input placeholder="https://forms.google.com/..." {...field} />
-              </FormControl>
-              <FormDescription>Link to your course assessments</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={form.control}

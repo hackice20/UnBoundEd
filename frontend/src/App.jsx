@@ -12,6 +12,8 @@ import CoursePage from "./Pages/Course";
 import AdminDashboard from "./Pages/Admin/Dashboard";
 import CreateCourse from "./Pages/Admin/CreateCourse";
 import CourseLearningPage from "./Pages/Course/learn";
+import AdminAuth from "./Pages/Admin/Auth";
+import CreateQuiz from "./Pages/Admin/CreateQuiz";
 
 const App = () => {
   return (
@@ -28,8 +30,10 @@ const App = () => {
             <Route path="/exploreCourses" element={<ExploreCourses />} />
             <Route path="/course/:id" element={<CoursePage />} />
             <Route path="/learn" element={<CourseLearningPage/>} />
+            <Route path="/admin/auth" element={<AdminAuth />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/createCourse" element={<CreateCourse />} />
+            <Route path="/admin/:id/createQuiz" element={<CreateQuiz />} />
           </Routes>
           <Footer />
         </AuthProvider>

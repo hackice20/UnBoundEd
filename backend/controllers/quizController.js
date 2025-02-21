@@ -19,6 +19,10 @@ export const createQuiz = async (req, res) => {
     
     const newQuiz = new Quiz({ title, course, questions, timer });
     await newQuiz.save();
+
+    courseExists.quiz = newQuiz._id;
+    await courseExists.save();
+    
     res.status(201).json({ message: 'Quiz created successfully', quiz: newQuiz });
   } catch (err) {
     console.error(err);

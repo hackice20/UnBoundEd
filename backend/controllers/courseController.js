@@ -5,8 +5,8 @@ import Course from '../models/Course.js';
 // Admin: Create a new course
 export const createCourse = async (req, res) => {
   try {
-    const { title, description, youtubePlaylist, googleQuizLink, discordServerLink, price, thumbnail, instructor } = req.body;
-    const newCourse = new Course({ title, description, youtubePlaylist, googleQuizLink, discordServerLink, price, thumbnail, instructor });
+    const { title, description, youtubePlaylist, discordServerLink, price, thumbnail, instructor } = req.body;
+    const newCourse = new Course({ title, description, youtubePlaylist, discordServerLink, price, thumbnail, instructor });
     await newCourse.save();
     res.status(201).json({ message: 'Course created successfully', course: newCourse });
   } catch (err) {

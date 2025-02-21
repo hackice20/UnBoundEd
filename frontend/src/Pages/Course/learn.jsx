@@ -247,7 +247,8 @@ export default function CourseLearningPage() {
         <div className="flex w-full items-center justify-center">
           <div className="aspect-video w-[60vw] bg-black">
             <iframe
-              src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=0&rel=0`}
+              // src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=0&rel=0`}
+              src={`https://res.cloudinary.com/drn8ou2tw/video/upload/v1740106226/From_S1E8_2022_kingz_moviex_gqb6cs.mp4`}
               title="Course Video"
               className="object-cover w-[60vw] h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -34,21 +34,6 @@ const CourseDetails = ({ form, thumbnail, handleThumbnailChange, setThumbnail })
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="instructor"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Instructor Name</FormLabel>
-              <FormControl>
-                <Input placeholder="John Doe" {...field} />
-              </FormControl>
-              <FormDescription>Name of the course instructor</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <div>
           <Label htmlFor="thumbnail">Course Thumbnail</Label>
           <div className="mt-2">
