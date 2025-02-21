@@ -29,6 +29,7 @@ const Register = ({ setTab }) => {
           email: user.email,
           password: user.password
         }),
+        mode : "cors"
       });
   
       if (!response.ok) throw new Error("Failed to register");

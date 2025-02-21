@@ -13,8 +13,10 @@ import { AuthContext } from "@/context/authContext";
 
 export default function CreateCoursePage() {
   const [thumbnail, setThumbnail] = useState(null);
+  const [videoFile, setVideoFile] = useState(null); // State for video file
+  const [error, setError] = useState(""); // State for error messages
   const token = sessionStorage.getItem("token");
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const form = useForm({
@@ -28,32 +30,77 @@ export default function CreateCoursePage() {
     },
   });
 
+  // Validate video file
+  const validateFile = (file) => {
+    const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB in bytes
+    const ALLOWED_TYPES = [
+      "video/mp4",
+      "video/quicktime",
+      "video/x-msvideo",
+      "video/x-matroska",
+    ];
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return "Invalid file type. Please upload an MP4, MOV, AVI, or MKV file.";
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      return "File is too large. Maximum size is 100MB.";
+    }
+    return null;
+  };
+
+  // Handle video file change
+  const handleVideoChange = (event) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const fileError = validateFile(file);
+      if (fileError) {
+        setError(fileError);
+        event.target.value = ""; // Clear the file input
+        return;
+      }
+      setVideoFile(file);
+      setError("");
+    }
+  };
+
+  // Handle form submission
   const onSubmit = async (values) => {
     try {
+      if (!videoFile) {
+        setError("Please select a video file.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("description", values.description);
+      formData.append("youtubePlaylist", values.youtubePlaylist);
+      formData.append("discordServerLink", values.discordServerLink);
+      formData.append("price", values.price);
+      formData.append("thumbnail", values.thumbnail);
+      formData.append("instructor", user.id);
+      formData.append("category", values.category || "development");
+      formData.append("video", videoFile); // Append the video file
+
       const response = await fetch(`http://localhost:3000/api/courses`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          title: values.title,
-          description: values.description,
-          youtubePlaylist: values.youtubePlaylist,
-          discordServerLink: values.discordServerLink,
-          price: values.price,
-          thumbnail: values.thumbnail,
-          instructor: user.id,
-          category: values.category || "development"
-        })
-      })
+        body: formData, // Send FormData instead of JSON
+      });
+
       if (response.ok) {
         const data = await response.json();
         const id = data.course._id;
         navigate(`/admin/${id}/createQuiz`);
+      } else {
+        throw new Error("Failed to create course");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      setError(error.message || "An unexpected error occurred. Please try again.");
     }
   };
 
@@ -110,6 +157,23 @@ export default function CreateCoursePage() {
                 handleThumbnailChange={handleThumbnailChange}
                 setThumbnail={setThumbnail}
               />
+              {/* Video Upload Section */}
+              <div className="form-group">
+                <label htmlFor="videoFile">
+                  Upload Video (MP4, MOV, AVI, or MKV, max 100MB)
+                </label>
+                <input
+                  type="file"
+                  id="videoFile"
+                  onChange={handleVideoChange}
+                  accept="video/mp4,video/quicktime,video/x-msvideo,video/x-matroska"
+                  required
+                />
+                {videoFile && !error && (
+                  <p>Selected file: {videoFile.name}</p>
+                )}
+                {error && <p className="error-message">{error}</p>}
+              </div>
               <div className="flex items-center gap-4">
                 <Button
                   type="submit"
