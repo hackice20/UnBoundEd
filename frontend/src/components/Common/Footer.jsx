@@ -47,8 +47,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
-                  FAQs
+                <Link href="/admin/auth" className="hover:text-white">
+                  Admin Login
                 </Link>
               </li>
             </ul>
