@@ -72,9 +72,9 @@ consumption and maximum engagement. 🚀
 | **Database**               | MongoDB, Mongoose |done|
 | **API Framework**          | Express.js |done|
 | **AI Chatbot**             | Claude AI API |pending...|
-| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |pending...|
-| **Video Storage**          | Youtube |done|semi|
-| **Certificate Generation** | pdfkit, node-html-pdf |
+| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |done|
+| **Video Storage**          | Youtube |done|done|
+| **Certificate Generation** | pdfkit, node-html-pdf |done|
 | **Offline Syncing**        | PouchDB, Workbox (Service Workers) |pending...|
 | **Community Features**     | Socket.io, Discourse Integration |done|
 | **Gamification & Rewards** | Custom Rewards Logic |pending...|
@@ -88,17 +88,23 @@ consumption and maximum engagement. 🚀
    ├── /frontend
    ├── /backend
       ├── package.json
+      ├── package-lock.json
+      ├── result.json
+      ├── .gitignore
       ├── server.js
       ├── config
       │   ├── config.js         // config constants (JWT secret, etc.)
       │   └── db.js             // MongoDB connection
       ├── models
       │   ├── User.js           // User model (for auth)
-      │   ├── Admin.js          // Admin model (for auth)
+      │   ├── Admin.js         // Admin model (for auth)
+      |   ├── Quiz.js
       │   └── Course.js         // Course model
       ├── controllers
       │   ├── authController.js // Auth logic for users
       │   ├── adminController.js// Auth logic for admins
+      |   ├── quizController.js
+      |   ├── leaderboardController.js
       │   └── courseController.js // CRUD for courses and certificate API
       ├── middleware
       │   └── authMiddleware.js // JWT validation and role-checking
@@ -107,7 +113,11 @@ consumption and maximum engagement. 🚀
       │   ├── adminRoutes.js    // Public admin auth endpoints
       │   ├── courseRoutes.js   // CRUD endpoints for courses (admin only for create/update/delete)
       │   └── certificateRoutes.js // GET endpoint for certificate data
- ├──Readme.md
+      |   ├── leaderboardRoutes.js
+      |   ├── quizRoutes.js
+      ├── utils
+          └── resultHelper.js
+  ├──Readme.md
 
 ```
 ---
