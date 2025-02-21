@@ -89,33 +89,33 @@ consumption and maximum engagement. 🚀
    ├── /backend
       ├── package.json
       ├── package-lock.json
-      ├── result.json
+      ├── result.json //stores results of Quizzes for leaderboard
       ├── .gitignore
       ├── server.js
-      ├── config
+      ├──/ config
       │   ├── config.js         // config constants (JWT secret, etc.)
       │   └── db.js             // MongoDB connection
-      ├── models
+      ├──/ models
       │   ├── User.js           // User model (for auth)
       │   ├── Admin.js         // Admin model (for auth)
-      |   ├── Quiz.js
+      |   ├── Quiz.js          //Quiz model(array of questions, options array ,time limit )
       │   └── Course.js         // Course model
-      ├── controllers
+      ├──/ controllers
       │   ├── authController.js // Auth logic for users
-      │   ├── adminController.js// Auth logic for admins
-      |   ├── quizController.js
+      │   ├── adminController.js // Auth logic for admins
+      |   ├── quizController.js // CRUD 
       |   ├── leaderboardController.js
       │   └── courseController.js // CRUD for courses and certificate API
-      ├── middleware
+      ├──/ middleware
       │   └── authMiddleware.js // JWT validation and role-checking
-      ├── routes
+      ├──/ routes
       │   ├── authRoutes.js     // Public user auth endpoints
       │   ├── adminRoutes.js    // Public admin auth endpoints
       │   ├── courseRoutes.js   // CRUD endpoints for courses (admin only for create/update/delete)
       │   └── certificateRoutes.js // GET endpoint for certificate data
-      |   ├── leaderboardRoutes.js
-      |   ├── quizRoutes.js
-      ├── utils
+      |   ├── leaderboardRoutes.js //GET Leaderboard
+      |   ├── quizRoutes.js //create Quiz,Update,Delete(isAdmin) || attemptQuiz (User)
+      ├──/ utils
           └── resultHelper.js
   ├──Readme.md
 
