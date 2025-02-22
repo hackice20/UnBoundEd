@@ -15,6 +15,7 @@ import CourseLearningPage from "./Pages/Course/learn";
 import AdminAuth from "./Pages/Admin/Auth";
 import CreateQuiz from "./Pages/Admin/CreateQuiz";
 import ProtectedRoute from "./components/Common/ProtectedRoutes";
+import QuizApp from "./Pages/Quiz/TakeQuiz";
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
             <Route path="/course/:id" element={<CoursePage />} />
             <Route path="/learn/:id" element={<CourseLearningPage />} />
             <Route path="/admin/auth" element={<AdminAuth />} />
-
+            <Route path="/takeQuiz/:id" element={<QuizApp />} />
             {/* Protected Admin Routes */}
             <Route 
               path="/admin/dashboard" 
