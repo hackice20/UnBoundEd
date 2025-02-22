@@ -58,7 +58,7 @@ export default function CoursePage() {
       const data = await response.json();
       if (response.ok) {
         console.log("Purchase successful:", data);
-        navigate(`/learn/${course._id}`)
+        navigate(`/dashboard`)
       } else {
         console.error("Purchase failed:", data.message);
       }
