@@ -69,6 +69,7 @@ export const getCourses = async (req, res) => {
 // Public: Get course details by ID
 export const getCourseById = async (req, res) => {
   try {
+    const courseId = req.params.id || req.bodyl
     const course = await Course.findById(req.params.id);
     if (!course) return res.status(404).json({ message: "Course not found" });
     res.json(course);
@@ -158,12 +159,25 @@ export const purchaseCourse = async (req, res) => {
       return res.status(401).json({ message: 'User not authenticated' });
     }
 
+    // Validate ObjectIds
+    if (
+      !mongoose.Types.ObjectId.isValid(courseId) ||
+      !mongoose.Types.ObjectId.isValid(userId)
+    ) {
+      return res.status(400).json({ message: "Invalid course or user ID" });
+    }
+
     const course = await Course.findById(courseId);
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
     }
 
     const userObjectId = new mongoose.Types.ObjectId(userId);
+    if (course.boughtBy.includes(userObjectId)) {
+      return res
+        .status(400)
+        .json({ message: "You already purchased this course" });
+      
     if (course.boughtBy.some(user => user.equals(userObjectId))) {
       return res.status(400).json({ message: 'You already purchased this course' });
     }
@@ -176,6 +190,12 @@ export const purchaseCourse = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Push the ObjectId properly
+    course.boughtBy.push(userObjectId);
+    await course.save();
+
+    const courseObjectId = new mongoose.Types.ObjectId(courseId);
+    user.enrolledCourses.push(courseObjectId);
     user.enrolledCourses.push(courseId);
     await user.save();
 
@@ -285,16 +305,21 @@ export const getCoursesByUser = async (req, res) => {
       return res.status(401).json({ message: "User not authenticated" });
     }
 
+    const user = await User.findById(userId).populate("enrolledCourses"); // Ensure 'enrolledCourses' is populated with course data
+
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User Not Found" });
     }
 
+    console.log("User ID:", userId);
+    console.log("Enrolled Courses:", user.enrolledCourses);
+
     return res.status(200).json({
-      courses: user.enrolledCourses,
+      courses: user.enrolledCourses || [],
     });
   } catch (error) {
     console.error("Error fetching user's courses:", error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: error.message });
   }
 };
