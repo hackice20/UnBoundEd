@@ -6,20 +6,13 @@ import { jwtSecret, tokenExpiry } from "../config/config.js";
 
 export const registerUser = async (req, res) => {
   try {
-
-    const { email, password } = req.body;
-    const existingUser = await User.findOne({ email });
+    const { username, email, password } = req.body;
+    const existingUser = await User.findOne({ username });
     if (existingUser)
       return res.status(400).json({ message: "User already exists" });
 
-
-    const { username , email, password } = req.body;
-    const existingUser = await User.findOne({ username });
-    if (existingUser) return res.status(400).json({ message: 'User already exists' });
-    
-
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username , email, password: hashedPassword });
+    const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully" });
@@ -57,7 +50,7 @@ export const userDashboard = (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const userId  = req.user.id;
+    const userId = req.user.id;
 
     const user = await User.findById(userId).populate(`enrolledCourses`);
 

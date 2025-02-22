@@ -97,16 +97,18 @@ export default function CourseLearningPage() {
           <div className="border-t p-4">
             <div className="space-y-2">
               <p>Once completed take the quiz</p>
-              <Button
-                variant="outline"
-                className="w-full justify-start"
-                // asChild
-              >
-                {/* <Link to={course.resources.quizLink} target="_blank"> */}
-                <HelpCircle className="mr-2 h-4 w-4" />
-                Take Quiz
-                {/* </Link> */}
-              </Button>
+              <Link to={`/takeQuiz/${course.quiz}`}>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  // asChild
+                >
+                  {/* <Link to={course.resources.quizLink} target="_blank"> */}
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  Take Quiz
+                  {/* </Link> */}
+                </Button>
+              </Link>
               <Separator className="my-5" />
               <p>If any doubt join the discord</p>
               <Button
