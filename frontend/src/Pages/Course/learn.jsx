@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -21,78 +19,36 @@ import {
   HelpCircle,
   ChevronLeft,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function CourseLearningPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentVideoId, setCurrentVideoId] = useState("dQw4w9WgXcQ");
+  const [course, setCourse] = useState([]);
+  const { id } = useParams();
 
-  const course = {
-    title: "Complete Web Development Bootcamp",
-    progress: 35,
-    totalLessons: 48,
-    completedLessons: 17,
-    sections: [
-      {
-        id: 1,
-        title: "Getting Started with Web Development",
-        lessons: [
-          {
-            id: "lesson1",
-            title: "Introduction to Web Development",
-            duration: "15:00",
-            videoId: "dQw4w9WgXcQ",
-            completed: true,
-          },
-          {
-            id: "lesson2",
-            title: "Setting Up Your Development Environment",
-            duration: "20:00",
-            videoId: "dQw4w9WgXcQ",
-            completed: true,
-          },
-          {
-            id: "lesson3",
-            title: "Understanding HTML Basics",
-            duration: "25:00",
-            videoId: "dQw4w9WgXcQ",
-            completed: false,
-          },
-        ],
-      },
-      {
-        id: 2,
-        title: "CSS Fundamentals",
-        lessons: [
-          {
-            id: "lesson4",
-            title: "CSS Selectors and Properties",
-            duration: "30:00",
-            videoId: "dQw4w9WgXcQ",
-            completed: false,
-          },
-          {
-            id: "lesson5",
-            title: "Flexbox and Grid Layout",
-            duration: "45:00",
-            videoId: "dQw4w9WgXcQ",
-            completed: false,
-          },
-          {
-            id: "lesson6",
-            title: "Responsive Design Principles",
-            duration: "35:00",
-            videoId: "dQw4w9WgXcQ",
-            completed: false,
-          },
-        ],
-      },
-    ],
-    resources: {
-      quizLink: "https://forms.google.com/...",
-      discordLink: "https://discord.gg/...",
-    },
+  const getCourse = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/courses/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setCourse(data);
+      }
+    } catch (error) {
+      console.log("Error in fetching the course ", error);
+    }
   };
+
+  useEffect(() => {
+    getCourse();
+  }, [id]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -101,6 +57,10 @@ export default function CourseLearningPage() {
   const handleLessonClick = (videoId) => {
     setCurrentVideoId(videoId);
   };
+
+  useEffect(() => {
+    getCourse();
+  }, []);
 
   return (
     <div className="flex h-screen bg-[#FFFBF5]">
@@ -132,73 +92,32 @@ export default function CourseLearningPage() {
             <h2 className="mb-2 font-semibold text-slate-800">
               {course.title}
             </h2>
-            <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="text-slate-600">
-                {course.completedLessons} of {course.totalLessons} lessons
-              </span>
-              <span className="font-medium text-purple-600">
-                {course.progress}%
-              </span>
-            </div>
-            <Progress value={course.progress} className="h-2" />
           </div>
-
-          <ScrollArea className="flex-1">
-            <Accordion type="single" collapsible className="w-full">
-              {course.sections.map((section) => (
-                <AccordionItem key={section.id} value={`section-${section.id}`}>
-                  <AccordionTrigger className="px-4 text-sm hover:no-underline">
-                    {section.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-1 p-2">
-                      {section.lessons.map((lesson) => (
-                        <button
-                          key={lesson.id}
-                          onClick={() => handleLessonClick(lesson.videoId)}
-                          className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-sm hover:bg-slate-50"
-                        >
-                          {lesson.completed ? (
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                          ) : (
-                            <PlayCircle className="h-4 w-4 text-slate-400" />
-                          )}
-                          <div className="flex-1">
-                            <p className="text-slate-700">{lesson.title}</p>
-                            <p className="text-xs text-slate-500">
-                              {lesson.duration}
-                            </p>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </ScrollArea>
 
           <div className="border-t p-4">
             <div className="space-y-2">
+              <p>Once completed take the quiz</p>
               <Button
                 variant="outline"
                 className="w-full justify-start"
-                asChild
+                // asChild
               >
-                <Link to={course.resources.quizLink} target="_blank">
-                  <HelpCircle className="mr-2 h-4 w-4" />
-                  Take Quiz
-                </Link>
+                {/* <Link to={course.resources.quizLink} target="_blank"> */}
+                <HelpCircle className="mr-2 h-4 w-4" />
+                Take Quiz
+                {/* </Link> */}
               </Button>
+              <Separator className="my-5" />
+              <p>If any doubt join the discord</p>
               <Button
                 variant="outline"
                 className="w-full justify-start"
-                asChild
+                // asChild
               >
-                <Link to={course.resources.discordLink} target="_blank">
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Join Discord
-                </Link>
+                {/* <Link to={course.resources.discordLink} target="_blank"> */}
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Join Discord
+                {/* </Link> */}
               </Button>
             </div>
           </div>
@@ -225,22 +144,6 @@ export default function CourseLearningPage() {
               Understanding HTML Basics
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden md:inline-flex"
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden md:inline-flex"
-            >
-              Next
-            </Button>
-          </div>
         </div>
 
         {/* Video Player */}
@@ -248,7 +151,7 @@ export default function CourseLearningPage() {
           <div className="aspect-video w-[60vw] bg-black">
             <iframe
               // src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=0&rel=0`}
-              src={`https://res.cloudinary.com/drn8ou2tw/video/upload/v1740106226/From_S1E8_2022_kingz_moviex_gqb6cs.mp4`}
+              src={`${course.youtubePlaylist}`}
               title="Course Video"
               className="object-cover w-[60vw] h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -262,13 +165,9 @@ export default function CourseLearningPage() {
         <div className="p-6">
           <div className="mb-6">
             <h1 className="mb-2 text-2xl font-bold text-slate-800">
-              Understanding HTML Basics
+              {course.title}
             </h1>
-            <p className="text-slate-600">
-              Learn the fundamental building blocks of HTML and how to structure
-              your web pages effectively. This lesson covers elements,
-              attributes, and best practices for writing clean HTML code.
-            </p>
+            <p className="text-slate-600">{course.description}</p>
           </div>
         </div>
       </div>
