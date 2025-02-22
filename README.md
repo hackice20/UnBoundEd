@@ -71,16 +71,13 @@ consumption and maximum engagement. 🚀
 | **Authentication**         | Passport.js, JWT, bcrypt |done|
 | **Database**               | MongoDB, Mongoose |done|
 | **API Framework**          | Express.js |done|
-| **AI Chatbot**             | Claude AI API |pending...|
-<<<<<<< HEAD
+| **AI Chatbot**             | Gemini AI API |done|
 | **Leaderboard System**     | Custom Logic + MongoDB Aggregation |done|
+| **Video Storage**          | Youtube |done|
+| **Certificate Generation** | pdfkit, node-html-pdf |done|
+| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |pending...|
 | **Video Storage**          | Youtube |done|done|
 | **Certificate Generation** | pdfkit, node-html-pdf |done|
-=======
-| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |pending...|
-| **Video Storage**          | Youtube |done|semi|
-| **Certificate Generation** | pdfkit, node-html-pdf |
->>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
 | **Offline Syncing**        | PouchDB, Workbox (Service Workers) |pending...|
 | **Community Features**     | Socket.io, Discourse Integration |done|
 | **Gamification & Rewards** | Custom Rewards Logic |pending...|
@@ -94,14 +91,14 @@ consumption and maximum engagement. 🚀
    ├── /frontend
    ├── /backend
       ├── package.json
-<<<<<<< HEAD
       ├── package-lock.json
       ├── result.json //stores results of Quizzes for leaderboard
       ├── .gitignore
       ├── server.js
       ├──/ config
       │   ├── config.js         // config constants (JWT secret, etc.)
-      │   └── db.js             // MongoDB connection
+      │   └── db.js           // MongoDB connection
+      |   ├── cloudinaryConfig.js
       ├──/ models
       │   ├── User.js           // User model (for auth)
       │   ├── Admin.js         // Admin model (for auth)
@@ -115,37 +112,18 @@ consumption and maximum engagement. 🚀
       │   └── courseController.js // CRUD for courses and certificate API
       ├──/ middleware
       │   └── authMiddleware.js // JWT validation and role-checking
+      |   ├── uploadMiddleware.js
       ├──/ routes
-=======
-      ├── server.js
-      ├── config
-      │   ├── config.js         // config constants (JWT secret, etc.)
-      │   └── db.js             // MongoDB connection
-      ├── models
-      │   ├── User.js           // User model (for auth)
-      │   ├── Admin.js          // Admin model (for auth)
-      │   └── Course.js         // Course model
-      ├── controllers
-      │   ├── authController.js // Auth logic for users
-      │   ├── adminController.js// Auth logic for admins
-      │   └── courseController.js // CRUD for courses and certificate API
-      ├── middleware
-      │   └── authMiddleware.js // JWT validation and role-checking
-      ├── routes
->>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
       │   ├── authRoutes.js     // Public user auth endpoints
       │   ├── adminRoutes.js    // Public admin auth endpoints
       │   ├── courseRoutes.js   // CRUD endpoints for courses (admin only for create/update/delete)
       │   └── certificateRoutes.js // GET endpoint for certificate data
-<<<<<<< HEAD
       |   ├── leaderboardRoutes.js //GET Leaderboard
       |   ├── quizRoutes.js //create Quiz,Update,Delete(isAdmin) || attemptQuiz (User)
+      |   ├── chatbotRoutes.js
       ├──/ utils
           └── resultHelper.js
-  ├──Readme.md
-=======
- ├──Readme.md
->>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
+   ├──Readme.md
 
 ```
 ---
@@ -233,13 +211,15 @@ Here's an **API guide** table based on the routes you've provided. This will all
 | POST            | `/api/quiz/{{quizId}}/attempt`       | User             | Submit quiz attempt                           | `Authorization: Bearer {{userToken}}` <br> `Content-Type: application/json` | `{ "answers": [ ...10 answers... ], "timeTaken": 290 }`               |
 
 ---
+
 ## Get Leader Board
 
-<<<<<<< HEAD
 localhost:3000/api/leaderboard/<courseId>
 
+---
+
 ## API KEY
+
 GEMINI_API_KEY = AIzaSyC1ZLy_olVsr-ItHdv5nSdM7K4ewbO-zYQ
-=======
-localhost:3000/api/leaderboard
->>>>>>> eaeaeab (Added AI ChatBot Seperate LeaderBoard for Each Course)
+
+---
