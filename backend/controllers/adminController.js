@@ -6,12 +6,12 @@ import { jwtSecret, tokenExpiry } from '../config/config.js';
 
 export const registerAdmin = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const existingAdmin = await Admin.findOne({ email });
+    const { username , email, password } = req.body;
+    const existingAdmin = await Admin.findOne({ username });
     if (existingAdmin) return res.status(400).json({ message: 'Admin already exists' });
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newAdmin = new Admin({ email, password: hashedPassword });
+    const newAdmin = new Admin({ username ,email, password: hashedPassword });
     await newAdmin.save();
     
     res.status(201).json({ message: 'Admin registered successfully' });

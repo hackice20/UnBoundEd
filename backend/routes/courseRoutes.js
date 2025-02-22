@@ -1,16 +1,7 @@
 // routes/courseRoutes.js
 import express from 'express';
 
-import {
-  createCourse,
-  getCourses,
-  getCourseById,
-  updateCourse,
-  deleteCourse,
-  purchaseCourse,
-  rateCourse,
-  giveReview,
-} from '../controllers/courseController.js';
+
 
 import { createCourse, getCourses, getCourseById, updateCourse, deleteCourse, purchaseCourse, rateCourse, giveReview, getCoursesByUser } from '../controllers/courseController.js';
 
