@@ -21,11 +21,14 @@ import {
   Flame,
   ShieldCheck,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function CoursePage() {
   const [selectedTab, setSelectedTab] = useState("curriculum");
   const { id } = useParams();
   const [course, setCourseDetails] = useState([]);
+  const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
 
   const getcourse = async () => {
     try {
@@ -40,6 +43,30 @@ export default function CoursePage() {
       console.error("Error fetching course details:", error);
     }
   };
+
+  const handleBuyNow = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:3000/api/courses/${id}/purchase`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Purchase successful:", data);
+        navigate(`/learn/${course._id}`)
+      } else {
+        console.error("Purchase failed:", data.message);
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
+  };
+  
 
   useEffect(() => {
     getcourse();
@@ -102,7 +129,7 @@ export default function CoursePage() {
             <span className="text-2xl font-bold text-slate-800">${course.price || "99"}</span>
             <span className="ml-2 text-slate-500 line-through">${course.originalPrice || "109"}</span>
           </div>
-          <Button className="bg-purple-600 hover:bg-purple-700">Buy now</Button>
+          <Button onClick={handleBuyNow} className="bg-purple-600 hover:bg-purple-700">Buy now</Button>
         </div>
       </div>
       </div>
