@@ -75,7 +75,7 @@ consumption and maximum engagement. 🚀
 | **Leaderboard System**     | Custom Logic + MongoDB Aggregation |done|
 | **Video Storage**          | Youtube |done|
 | **Certificate Generation** | pdfkit, node-html-pdf |done|
-| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |pending...|
+| **Leaderboard System**     | Custom Logic + MongoDB Aggregation |done|
 | **Video Storage**          | Youtube |done|done|
 | **Certificate Generation** | pdfkit, node-html-pdf |done|
 | **Offline Syncing**        | PouchDB, Workbox (Service Workers) |pending...|
